@@ -17,9 +17,11 @@ CREATE TABLE books
 (
     book_id          SERIAL PRIMARY KEY,
     author_id        INTEGER NOT NULL,
-    name             VARCHAR(200),
+    title            VARCHAR(200),
     isbn             VARCHAR(50),
-    publication_date DATE
+    publisher        VARCHAR(250),
+    publication_year SMALLINT,
+    description      TEXT
 );
 
 CREATE TABLE loans
@@ -33,6 +35,8 @@ CREATE TABLE loans
     status      VARCHAR(1),
     notes       TEXT
 );
+
+COMMENT ON COLUMN loans.status IS 'A: available, C: checked_out, R: reserved, L: lost, X: archived';
 
 ALTER TABLE books
     ADD CONSTRAINT books_author_id_fk
