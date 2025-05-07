@@ -21,8 +21,11 @@ CREATE TABLE IF NOT EXISTS books
     isbn             VARCHAR(50),
     publisher        VARCHAR(250),
     publication_year SMALLINT,
-    description      TEXT
+    description      TEXT,
+    status           VARCHAR(1)
 );
+
+COMMENT ON COLUMN books.status IS 'A: available, C: checked_out, R: reserved, L: lost, X: archived';
 
 CREATE TABLE IF NOT EXISTS loans
 (
@@ -36,7 +39,7 @@ CREATE TABLE IF NOT EXISTS loans
     notes       TEXT
 );
 
-COMMENT ON COLUMN loans.status IS 'A: available, C: checked_out, R: reserved, L: lost, X: archived';
+COMMENT ON COLUMN loans.status IS 'A: active, R: returned, O: overdue, L: lost';
 
 ALTER TABLE books
     ADD CONSTRAINT books_author_id_fk
