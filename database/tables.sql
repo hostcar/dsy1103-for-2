@@ -1,4 +1,4 @@
-CREATE TABLE users
+CREATE TABLE IF NOT EXISTS users
 (
     user_id  SERIAL PRIMARY KEY,
     name     VARCHAR(250) NOT NULL,
@@ -7,13 +7,13 @@ CREATE TABLE users
     is_valid BOOLEAN DEFAULT true
 );
 
-CREATE TABLE authors
+CREATE TABLE IF NOT EXISTS authors
 (
     author_id SERIAL PRIMARY KEY,
     name      VARCHAR(200)
 );
 
-CREATE TABLE books
+CREATE TABLE IF NOT EXISTS books
 (
     book_id          SERIAL PRIMARY KEY,
     author_id        INTEGER NOT NULL,
@@ -24,7 +24,7 @@ CREATE TABLE books
     description      TEXT
 );
 
-CREATE TABLE loans
+CREATE TABLE IF NOT EXISTS loans
 (
     loan_id     SERIAL PRIMARY KEY,
     book_id     INTEGER   NOT NULL,
@@ -44,7 +44,7 @@ ALTER TABLE books
 
 ALTER TABLE loans
     ADD CONSTRAINT loans_book_id_fk
-        FOREIGN KEY (book_id) REFERENCES loans (book_id);
+        FOREIGN KEY (book_id) REFERENCES books (book_id);
 
 ALTER TABLE loans
     ADD CONSTRAINT loans_user_id_fk
